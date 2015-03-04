@@ -6,6 +6,7 @@ d3.hexbin = function() {
       r,
       x = d3_hexbinX,
       y = d3_hexbinY,
+      binCallback,
       dx,
       dy;
 
@@ -34,6 +35,7 @@ d3.hexbin = function() {
         bin.x = (pi + (pj & 1 ? 1 / 2 : 0)) * dx;
         bin.y = pj * dy;
       }
+      if (binCallback) binCallback(point, bin);
     });
 
     return d3.values(binsById);
@@ -62,7 +64,13 @@ d3.hexbin = function() {
     y = _;
     return hexbin;
   };
-
+     
+  hexbin.bin = function(_) {
+    if (!arguments.length) return binCallback;
+    binCallback = _;
+    return hexbin;
+  };
+     
   hexbin.hexagon = function(radius) {
     if (arguments.length < 1) radius = r;
     return "m" + hexagon(radius).join("l") + "z";

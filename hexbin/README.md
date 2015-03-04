@@ -60,3 +60,13 @@ Returns an array of [*x*, *y*] points representing the centers of each hexagon. 
 <a href="mesh" href="#mesh">#</a> hexbin.<b>mesh</b>()
 
 Returns the SVG path string for a hexagonal mesh that covers the area of the layout (as determined by the layout size). The returned mesh is designed to be stroked. The mesh may extend slightly beyond the layout’s defined area, and thus may need to be clipped.
+
+<a href="bin" href="#bin">#</a> hexbin.<b>bin</b>()
+
+After a point is assigned to a bin, you can update the bin object as you'd like (useful for setting values to use for size/radius scales):
+```js
+hexbin.bin(function (bin, point) {
+  bin.numPoints = (bin.numPoints || 0) + 1;
+});
+```
+ 
